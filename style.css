@@ -1,118 +1,147 @@
-.logo{
-    margin: auto;
-    display: block;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+body {
+    background-color: #ED8B00;
+    min-height: 100vh;
+}
 
-        body {
-            display: flex;
-            background-color: #ED8B00;
-            min-height: 100vh;
-        }
+/* Fő tartalom elrendezése a sidebar mellett */
+.main-content {
+    margin-left: 70px; /* A sidebar zárt szélessége */
+    width: calc(100% - 70px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Fentről lefelé rendezi a képet és a kártyákat */
+    align-items: center;    /* Vízszintesen középre helyezi a tartalmát */
+}
 
-        /* --- OLDALSÓ MENÜ ALAPSTÍLUSOK --- */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 70px; /* Összecsukott szélesség (csak ikonok) */
-            background-color: #27170d;
-            overflow: hidden; /* Elrejti a kilógó szövegeket összecsukott állapotban */
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Sima átmenet */
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
+/* Kép konténere és igazítása fent középen */
+.kep-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-        /* --- EGÉR RÁHÚZÁSÁRA KINYÍLIK (HOVER EFFECT) --- */
-        .sidebar:hover {
-            width: 240px; /* Kinyitott szélesség */
-        }
+.kep-container img {
+    max-width: 100%;
+    height: auto;
+}
 
-        /* Cím / Logó rész */
-        .sidebar .logo {
-            display: flex;
-            align-items: center;
-            height: 60px;
-            padding: 0 20px;
-            color: #fff;
-            border-bottom: 1px solid #334155;
-            white-space: nowrap; /* Megakadályozza a szöveg megtörését */
-        }
+/* Sidebar stílusok */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 70px; 
+    background-color: #27170d;
+    overflow: hidden; 
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
 
-        .sidebar .logo i {
-            font-size: 24px;
-            min-width: 30px;
-            color: #38bdf8;
-        }
+.sidebar:hover {
+    width: 240px;
+}
 
-        .sidebar .logo span {
-            font-size: 18px;
-            font-weight: bold;
-            margin-left: 15px;
-            opacity: 0; /* Alapból láthatatlan a szöveg */
-            transition: opacity 0.3s ease;
-        }
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    color: #fff;
+    border-bottom: 1px solid #334155;
+    white-space: nowrap;
+}
 
-        /* Menüpontok listája */
-        .sidebar-menu {
-            list-style: none;
-            padding-top: 15px;
-        }
-        
+.sidebar .logo i {
+    font-size: 24px;
+    min-width: 30px;
+    color: #38bdf8;
+}
 
-        .sidebar-menu li a {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            padding: 0 20px;
-            color: white;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
+.sidebar .logo span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-        /* Ikonok stílusa */
-        .sidebar-menu li a i {
-            font-size: 20px;
-            min-width: 30px; /* Biztosítja, hogy az ikonok egy vonalban maradjanak */
-            text-align: center;
-        }
+.sidebar-menu {
+    list-style: none;
+    padding-top: 15px;
+}
 
-        /* Szöveg stílusa */
-        .sidebar-menu li a span {
-            margin-left: 15px;
-            font-size: 16px;
-            opacity: 0; /* Alapból rejtett szöveg */
-            transition: opacity 0.3s ease;
-        }
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
 
-        /* Hover effektus a menüpontokon */
-        .sidebar-menu li a:hover {
-            color: #ffffff;
-            background-color: #f9c043;
-        }
+.sidebar-menu li a i {
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+}
 
-        .sidebar-menu li a:hover i {
-            color: #38bdf8;
-        }
+.sidebar-menu li a span {
+    margin-left: 15px;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-        /* --- A SZÖVEGEK MEGJELENÍTÉSE KINYITÁSKOR --- */
-        .sidebar:hover .logo span,
-        .sidebar:hover .sidebar-menu li a span {
-            opacity: 1; /* A szöveg láthatóvá válik, ha a menüre húzod az egeret */
-            transition-delay: 0.1s; /* Kicsi késleltetés a szebb hatásért */
-        }
+.sidebar-menu li a:hover {
+    color: #ffffff;
+    background-color: #f9c043;
+}
 
-        /* --- FŐ TARTALOM TERÜLETE --- */
-        .main-content {
-            margin-left: 70px; /* A zárt sáv szélességéhez igazítva */
-            padding: 40px;
-            flex: 1;
-        }
+.sidebar-menu li a:hover i {
+    color: #38bdf8;
+}
+
+.sidebar:hover .logo span,
+.sidebar:hover .sidebar-menu li a span {
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+/* Kép méretének szabályozása a carouselen */
+.boss-img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* A carouselen kívüli build konténer */
+.build-container {
+    background-color: #27170d;
+    border: 2px solid #334155;
+    transition: all 0.3s ease;
+}
+
+.build-details {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #38bdf8;
+}
+
+/* Finom átmenet az opciók váltásakor */
+.build-content {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
